@@ -5,11 +5,16 @@ const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
+const cors = require('cors');
 const path = require("path");
 
 dotenv.config();
+console.log(process.env.MONGO_URI)
+// Calling Database Connection
 connectDB();
+
 const app = express();
+app.use(cors());
 
 app.use(express.json()); // to accept json data
 
@@ -49,6 +54,7 @@ app.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}...`)
 });
 
+// Socket.IO Connection
 // const io = require("socket.io")(server, {
 //   pingTimeout: 60000,
 //   cors: {
